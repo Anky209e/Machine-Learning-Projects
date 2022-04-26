@@ -1,5 +1,5 @@
 ## Pothole Detection using Deep neural networks and OpenCV
-#### Data is gathered from randmo sites.
+#### Data is gathered from random sites.
 ## Data Preprocessing
 ### 1) Thresholding
 ### 2) Finding Edges
