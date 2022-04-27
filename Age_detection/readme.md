@@ -25,4 +25,4 @@ pip install opencv-python
 pip install torch torchvision pillow matplotlib
 python3 cv_age.py cam
 ```
-##### Note: use cam as argument for using yuor own camera.
+##### Note: use cam as argument for using your own camera.
