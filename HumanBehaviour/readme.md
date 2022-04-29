@@ -12,5 +12,8 @@
 ![Model](images/model.png)
 ### LSTM Layer
 ![lstm](images/lstm.png)
+### Training
+#### ACC was 73% with 30 epochs.
+![train](images/train.png)
 ## Run on your own Desktop
 #### Open .ipynb notebook and run predict_anomly function

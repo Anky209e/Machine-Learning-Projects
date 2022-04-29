@@ -8,7 +8,7 @@ HumanBehaviour/videos/daria_bend.avi
 *.pyc
 *.json
 *.jpeg
-*.png
+
 .obsidian/workspace
 HumanBehaviour/tested_methods/behaviour_spt.h5
 HumanBehaviour/tested_methods/Spatio_lstm.py
