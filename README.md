@@ -1,7 +1,6 @@
 # StudyMonk Tests
 ## 1) Human Behaviour detection.
-
-![HD](HumanBehaviour/images/output.gif)
+### Implemented with STD
 ## 2) Ageing Face classifier.
 
  ![AF](Age_detection/images/output.gif)
