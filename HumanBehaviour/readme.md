@@ -1,5 +1,6 @@
 # Human Behaviour classification
-![GIF](images/output.gif)
+### Implemented with spatial diffrence Learning.(New)
+![Paper](1701.01546.pdf)
 ## Dataset
 ### I downloaded some fighting videos from youtube and took snapshots to train model.
 ### Processing
