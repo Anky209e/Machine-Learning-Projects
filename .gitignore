@@ -14,3 +14,4 @@ HumanBehaviour/tested_methods/behaviour_spt.h5
 HumanBehaviour/tested_methods/Spatio_lstm.py
 HumanBehaviour/weights/behaviour_1.0.pth
 HumanBehaviour/.obsidian/workspace
+*.0
