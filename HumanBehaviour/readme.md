@@ -1,6 +1,6 @@
 # Human Behaviour classification
 ## You have to adjust your own threshold according to your enviroment.
-#### Note: This model was for anomaly anomaly detection in whole video we still implemented it in real-time with some trade-offs.
+#### Note: This model was for anomaly detection in whole video we still implemented it in real-time with some trade-offs.
 ### Implemented with spatial diffrence Learning.(New)
 ![Paper](1701.01546.pdf)
 ## Dataset
