@@ -13,46 +13,47 @@ import numpy as np
 arr = [1]
 arr_n = np.array(arr)
 
-data = predict_anomly(weights,np_path)
 
-frames_a = data[1]
-a = 1
+def open_cam():
+    data = predict_anomly(weights,np_path)
 
+    frames_a = data[1]
+    a = 1
 
-cap = cv.VideoCapture("demo/f4.mp4")
-v_count = int(cap.get(cv.CAP_PROP_FRAME_COUNT))
-print(v_count)
-while cap.isOpened():
-    
-    ret, frame = cap.read()
-    
-
-    if a in frames_a:
-        # time.sleep(2)
-        print(a)
-        main_text = "Abnormal"
-        cv.putText(frame, 
-                main_text, 
-                (50, 50), 
-                font, 1, 
-                (0, 255, 255), 
-                2, 
-                cv.LINE_4)
-    else:
-        main_text = "Normal"
-        cv.putText(frame, 
-                main_text, 
-                (50, 50), 
-                font, 1, 
-                (0, 255, 255), 
-                2, 
-                cv.LINE_4)
-
-    time.sleep(0.3)
-        # cv.imshow('frame', frame)
-    cv.imshow('frame', frame)
+    cap = cv.VideoCapture(0)
+    v_count = int(cap.get(cv.CAP_PROP_FRAME_COUNT))
+    print(v_count)
+    while cap.isOpened():
         
-    a+=1
+        ret, frame = cap.read()
+        
+
+        if a in frames_a:
+            # time.sleep(2)
+            print(a)
+            main_text = "Abnormal"
+            cv.putText(frame, 
+                    main_text, 
+                    (50, 50), 
+                    font, 1, 
+                    (0, 255, 255), 
+                    2, 
+                    cv.LINE_4)
+        else:
+            main_text = "Normal"
+            cv.putText(frame, 
+                    main_text, 
+                    (50, 50), 
+                    font, 1, 
+                    (0, 255, 255), 
+                    2, 
+                    cv.LINE_4)
+
+        time.sleep(0.3)
+            # cv.imshow('frame', frame)
+        cv.imshow('frame', frame)
+            
+        a+=1
     
 
 
@@ -63,9 +64,10 @@ while cap.isOpened():
     #     cv.putText(frame, main_text, (50, 50), font, 1, (0, 255, 255), 2, cv.LINE_4)
     #     cv.imshow("frame",frame)
 
-    if cv.waitKey(1) == ord('q'):
-        break
+        if cv.waitKey(1) == ord('q'):
+            break
 
-cap.release()
+    cap.release()
 cv.destroyAllWindows()
 
+open_cam()
