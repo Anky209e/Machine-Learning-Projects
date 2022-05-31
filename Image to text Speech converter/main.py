@@ -6,9 +6,10 @@ from PIL import Image,ImageTk
 
 #---------MongoDB cluster address here----------------#
 
-cluster = MongoClient('mongodb+srv://anky:1111@products0.bg4ke.mongodb.net/?retryWrites=true&w=majority')
+cluster = MongoClient('#---MongoDB address-here---#')
 db = cluster["SiteData"]
 
+system_name = os.system("uname")
 #-----------Finding duplicayes for registration-----#
 def find_id_pass():
     collection = db["id-pass-internship"]
@@ -50,7 +51,11 @@ def submit():
     if ret:
         print("Logged In")
         label1.configure(text="Successful")
-        os.system("python3 converter.py")
+        if system_name == "Linux":
+
+            os.system("python3 converter.py")
+        else:
+            os.system("python converter.py")
     else:
         label1.configure(text="Wrong username or password.")
         print("Wrong username or password!")
