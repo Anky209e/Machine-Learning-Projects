@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Air Quality Index Prediction Using Artificial Intelligence</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body class="bg-dark">
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1">Air Quality Index</span>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-center">
+                        <img src="https://www.deq.ok.gov/wp-content/uploads/air-division/aqi_mini.png" class="rounded img-fluid"
+                            alt="intro-img" width="75%">
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <h1 class="display-5">Predicting Fine-Grained Air Quality INDEX</h1>
+                    <p class="lead"></p>
+                    <h2><p>Using Artificial Intelligence</p></h2>
+                    <hr class="my-4">
+                    <p></p>
+                    
+                </div>
+            </div>
+            <hr>
+            <!-- Row Ends -->
+
+            <!--T Average Temperature (°C)
+                TM Maximum temperature (°C)
+                Tm Minimum temperature (°C)
+                SLP Atmospheric pressure at sea level (hPa)
+                H Average relative humidity (%)
+                PP Total rainfall and / or snowmelt (mm)
+                VV Average visibility (Km)
+                V Average wind speed (Km/h)
+                VM Maximum sustained wind speed (Km/h) -->
+
+            <div class="row my-4">
+                <div class="col-md-6">
+                    <h3>Enter the Details</h3>
+                    <form method="POST" , action="/">
+                        <div class="form-row">
+                            <div class="col-6">
+                                <input type="text" class="form-control my-1" placeholder="Average Temperature (°C)"
+                                    name='T' required>
+                            </div>
+                            <div class="col-6">
+                                <input type="text" class="form-control my-1" placeholder="Maximum Temperature (°C)"
+                                    name='TM' required>
+                            </div>
+                            <div class="col-4">
+                                <input type="text" class="form-control my-1" placeholder="Min Temp(°C)" name='Tm'
+                                    required>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control my-1"
+                                    placeholder="Atmospheric pressure at sea level (hPa)" name='SLP' required>
+                            </div>
+                            <div class="col-6">
+                                <input type="text" class="form-control my-1" placeholder="Average relative humidity (%)"
+                                    name='H' required>
+                            </div>
+                            <div class="col-7">
+                                <input type="text" class="form-control my-1" placeholder="Avg visibility (Km)" name='VV'
+                                    required>
+                            </div>
+                            <div class="col-5">
+                                <input type="text" class="form-control my-1" placeholder="Avg wind speed (Km/h)"
+                                    name='V' required>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control my-1"
+                                    placeholder="Maximum sustained wind speed (Km/h)" name='VM' required>
+                            </div>
+                            <div class="col-3">
+                                <button type="submit" class="btn btn-primary my-1 btn-block">Send details to AI</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-6">
+                    <h3> </h3>
+                    {% if lr_pm %}
+                    {% if lr_pm < 51 %}
+                    <h4 class="text text-success">Predicted value of PM <sub>2.5</sub> is {{ lr_pm[0] }} μg/m3, GOOD</h4>
+                    {% elif lr_pm < 101 %}
+                    <h4 class="text text-info">Predicted value of PM <sub>2.5</sub> is {{ lr_pm[0] }} μg/m3, MODERATE
+                    </h4>
+                    {% elif lr_pm < 151 %}
+                    <h4 class="text text-primary">Predicted value of PM <sub>2.5</sub> is {{ lr_pm[0] }} μg/m3, UNHEALTHY
+                        FOR KIDS</h4>
+                    {% elif lr_pm < 201 %}
+                    <h4 class="text text-warning">Predicted value of PM <sub>2.5</sub> is {{ lr_pm[0] }} μg/m3, UNHEALTHY
+                    </h4>
+                    {% elif lr_pm < 301 %}
+                    <h4 class="text text-danger">Predicted value of PM <sub>2.5</sub> is {{ lr_pm[0] }} μg/m3, VERY
+                        UNHEALTHY</h4>
+                    {% else %}
+                    <h4 class="text text-danger">Predicted value of PM <sub>2.5</sub> is {{ lr_pm[0] }} μg/m3, CAUTION HAZARDOUS
+                    </h4>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+</body>
+
+</html>
