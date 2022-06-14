@@ -7,9 +7,7 @@ import os
 import argparse
 import sys
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--img",type=str,required=True)
-args = parser.parse_args()
+
 
 warnings.filterwarnings("ignore")
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -52,33 +50,25 @@ def crop_brain_contour(image):
     return new_image
 
 # Parsing image path
-IMG_PATH = args.img
+def check_tumor(IMG_PATH,THRESHOLD):
 
 # pre-processing image 
-new_image = crop_brain_contour(IMG_PATH)
-new_image = new_image/255
-model_image = new_image.reshape(1,240,240,3)
+    new_image = crop_brain_contour(IMG_PATH)
+    new_image = new_image/255
+    model_image = new_image.reshape(1,240,240,3)
 
-# predicting output
-out = best_model.predict(model_image)
-prob = out[0][0]*10
+    # predicting output
+    out = best_model.predict(model_image)
+    prob = out[0][0]*10
 
-# threshold value for probablity
-THRESHOLD = 0.3
-
-# final conditions
-if prob >= THRESHOLD:
-    print("**** Brain Tumor Detected ****")
-    status = "Tumor Detected"
-    print("**** Probablity:{} ****".format(round(prob*100,3)))
-    
-else:
-    print("**** No Tumor Detection ****")
-    status = "No Tumor Detected"
-    print("**** Probablity:{} ****".format(prob*100))
-
-cv2.imshow(status,new_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-sys.exit()
+    # final conditions
+    if prob >= THRESHOLD:
+        print("**** Brain Tumor Detected ****")
+        status = "Tumor Detected"
+        print("**** Probablity:{} ****".format(round(prob*100,3)))
+        
+    else:
+        print("**** No Tumor Detection ****")
+        status = "No Tumor Detected"
+        print("**** Probablity:{} ****".format(prob*100))
+    return status,prob
