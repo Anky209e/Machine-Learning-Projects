@@ -1,0 +1,5 @@
+opencv-python
+numpy
+boto3
+pyperclip
+pillow
