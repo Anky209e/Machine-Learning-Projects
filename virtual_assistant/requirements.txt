@@ -1,0 +1,10 @@
+pyttsx3
+gtts
+SpeechRecognition
+wikipedia
+webbrowser
+pyjokes
+wolframalpha
+ctypes
+subprocess
+playsound
