@@ -1,4 +1,6 @@
-editdistance==0.5.2
+editdistance
+streamlit
+streamlit_drawable_canvas
 lmdb
 matplotlib
 numpy
