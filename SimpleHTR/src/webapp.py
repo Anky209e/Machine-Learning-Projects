@@ -2,6 +2,12 @@ import streamlit as st
 from streamlit_drawable_canvas import st_canvas
 import cv2
 from main import main
+from PIL import Image
+
+def load_image(image_file):
+    img = Image.open(image_file)
+    img.save("data/word.png")
+    return img
 
 def run():
     word,prob = main()
@@ -11,24 +17,19 @@ def run():
 st.title("Handwriting Recognition")
 st.write("***")
 
-st.write("### Write something")
-canvas_result = st_canvas(
-            fill_color="#eee",
-            stroke_width=5,
-            stroke_color="black",
-            background_color="white",
-            update_streamlit=False,
-            height=200,
-            width=400,
-            drawing_mode="freedraw",
-        )
+st.write("### Upload Image")
+
+
+
+image_file = st.file_uploader("Upload Image of skin or face", type=["png","jpg","jpeg"])
 
 predict_btl = st.button(label="Predict")
 
 st.write("***")
 if predict_btl:
-    if canvas_result.image_data is not None:
-        cv2.imwrite(f"data/word.png",  canvas_result.image_data)
+
+    if image_file is not None:
+        load_image(image_file)
         st.image(caption="Current Image",image="data/word.png")
         word , prob = run()
         st.write("## Word: ",word)
