@@ -3,4 +3,4 @@
 ***
 #### Still in progress
 
-- will edit readme later.
+- Adding more projects will update readme later

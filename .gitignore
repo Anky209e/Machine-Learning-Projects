@@ -8,6 +8,7 @@ HumanBehaviour/videos/daria_bend.avi
 *.pyc
 *.json
 *.jpeg
+*.JPG
 
 .obsidian/workspace
 HumanBehaviour/tested_methods/behaviour_spt.h5
@@ -24,3 +25,6 @@ Age_detection/vgg16_weights_tf_dim_ordering_tf_kernels.h5
 *.zip
 aqi/AirQualityPrediction-master.zip
 aqi/AirQualityPrediction-.zip
+*.html
+*.JPG
+Age_detection/demo/001A05.JPG
