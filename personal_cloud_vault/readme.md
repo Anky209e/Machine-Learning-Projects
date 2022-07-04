@@ -4,7 +4,7 @@
 * Server Side encryption
 * One click download
 
-![alt_text](assets/demo.jpg)
+![alt_text](/assets/demo.jpg)
 ## How to setup (linux only) ?
 > Get you AWS_SECERT_ACCESS_KEY and AWS_ACCESS_KEY_ID from you AWS Account
 ```bash
