@@ -3,7 +3,7 @@
 > Scraps images from bing for a search query
 
 
-![image](/images/demo.png)
+![image](images/demo.png)
 
 ## How to setup ?
 ```bash
