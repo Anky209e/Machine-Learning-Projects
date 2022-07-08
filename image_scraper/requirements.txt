@@ -1,0 +1,2 @@
+streamlit
+bing-image-downloader
