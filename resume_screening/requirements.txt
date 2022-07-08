@@ -1,0 +1,10 @@
+streamlit
+sklearn
+tensorflow
+nltk
+matplotlib
+gensim
+wordcloud
+pandas
+plotly
+pillow
