@@ -292,7 +292,17 @@
 ***
 ## Whatsapp Chat analysis
 * Analyse the whatsapp chat.
+***
+## Google search analysis
+* Analyse google search for a query
 
+*** 
+## Fraud Detection using ML
+* Detects a fraud in bank by user inputs
+
+***
+## Stress Detection using NLP
+* Detects if a person is stressed or not using chat.
 
 > All of the projects have either a Flask ,Streamlit ,Django or Tkinter GUI.
 
