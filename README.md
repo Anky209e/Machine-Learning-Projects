@@ -2,111 +2,7 @@
 
 ### *All Projects I have worked on during internship.*
 
-> Directory Structure
 
-```
-.
-├── acc_main
-├── Age_detection
-│   ├── data_files_saved
-│   ├── demo
-│   ├── demo2
-│   ├── images
-│   └── __pycache__
-├── AnalyzeTheChat
-│   ├── images
-│   ├── __pycache__
-│   └── results
-├── Animal-Intrusion-Alarm
-│   ├── images
-│   ├── __pycache__
-│   └── yolo-coco
-├── aqi
-│   └── AirQualityPrediction-
-├── ar_aruco
-├── Autonomous-Tagging-Of-Stack-Overflow-Questions
-│   └── archive
-├── Basic
-├── brain_tumor
-│   ├── images
-│   ├── __pycache__
-│   └── uploads
-├── car_damage
-│   └── __pycache__
-├── car_model_coco
-├── chatbot_nlp
-├── dress_generation
-│   ├── checkpoints
-│   ├── cihp_test_mask
-│   ├── data
-│   ├── docs
-│   ├── images_for_test
-│   ├── models
-│   ├── options
-│   ├── results
-│   ├── scripts
-│   ├── test
-│   ├── trainers
-│   └── util
-├── drowsiness_detection
-│   └── assets
-├── email_bot
-│   └── images
-├── HumanBehaviour
-│   ├── images
-│   ├── __pycache__
-│   └── weights
-├── Image-Cryptography-master
-│   ├── example
-│   └── rubikencryptor
-├── image_scraper
-│   └── images
-├── Image to text Speech converter
-│   ├── Output_audio
-│   └── Test Images
-├── leads
-├── Learning Outcomes
-│   ├── plots
-│   └── __pycache__
-├── oas
-├── personal_cloud_vault
-│   └── assets
-├── plant
-│   ├── images
-│   ├── __pycache__
-│   ├── static
-│   ├── templates
-│   ├── test
-│   ├── uploads
-│   └── weights
-├── pothole_detection
-│   └── images
-├── qr_code_generator
-├── real_time_face_blur
-│   └── images
-├── resume_screening
-│   └── main_web_app
-├── screen_recorder
-│   └── images
-├── sentence-similarity
-│   ├── img
-│   ├── models
-│   └── utils
-├── SimpleHTR
-│   ├── data
-│   ├── doc
-│   ├── model
-│   └── src
-├── skin_disease
-│   ├── images
-│   ├── __pycache__
-│   ├── uploads
-│   └── weights
-├── virtual_assistant
-├── word_extraction
-└── Yield-Prediction-main
-    └── res
-```
 
 ## **List of all Projects**
 
@@ -298,12 +194,21 @@
 
 *** 
 ## Fraud Detection using ML
-* Detects a fraud in bank by user inputs
+* Detects a fraud in bank by user inputsa
 
 ***
 ## Stress Detection using NLP
 * Detects if a person is stressed or not using chat.
-
+***
+## Personality Detection
+* Analyse Personality of a person using NLP
+***
+## Image Segmentation
+* Using YOLO to identify diffrent parts of image.
+***
+## Image to Sketch
+* Creates Sketch from a image using Computer vision.
+***
 > All of the projects have either a Flask ,Streamlit ,Django or Tkinter GUI.
 
 > Projects Using AWS requires AWS Keys.
