@@ -7,7 +7,7 @@ HumanBehaviour/videos/daria_bend.avi
 *.mat
 *.pyc
 *.json
-*.jpeg
+
 *.JPG
 
 .obsidian/workspace
