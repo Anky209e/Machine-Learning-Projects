@@ -1,0 +1,35 @@
+Creating A Water Mark on Images using Open CV
+
+Real-Time Face Mask Detection Model
+
+Face Swapping Application Made With OpenCV
+
+Smart Attendance System
+
+Collage Mosaic Generator
+
+Touch-less Display Interfaces on Edge
+
+Sudoku Solver
+
+Virtual Painting App Using OpenCV
+
+OpenCV Social distancing system
+
+Vehicle Counting and Classification system
+
+Virtual Drums with OpenCV
+
+OpenCV Photo Sketching
+
+Barcode and QR Code Scanner
+
+Blur the Face using OpenCV
+
+Image Segmentation Project
+
+Converting an Image to a Cartoon
+
+Human Counter Project Using OpenCV
+
+Edge detection Project
