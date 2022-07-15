@@ -144,24 +144,18 @@
 ***
 ## Skin Disease
 
-- Detects Skin Disease using skin image
+* Detects Skin Disease using skin image
 
 * * *
-
 ## Virtual Assistant
-
-- Virtual assistant for doing basic tasks like opening apps and playing music
-
+* Virtual assistant for doing basic tasks like opening apps and playing music
 * * *
 ##  Smart Attendance
 * Takes attendance using ML and opencv
-
 ***
-
 ## Sign Language Detection
 * Hand sign language detection using deep learning
 ***
-
 ## Autonomous Tagging of StackOverflow Questions
 * Tags Stackoverflow questions according to relevency
 ***
@@ -209,6 +203,24 @@
 ## Image to Sketch
 * Creates Sketch from a image using Computer vision.
 ***
+## Gans Dress Generation
+* Generates dress using gans
+***
+## Deepfake Detection
+* Detects if a face is deepfaked or not
+***
+##  Emergency Vehicle Detection
+* Detects emergency vehicle from a image
+## Search Engine
+* Search Engine Created using Streamlit and BS4
+***
+## Location Based Crime Prediction
+* Predicts Crimes using Location with ML
+***
+## Ambulance Routing
+* Finding Shortest Ambulance Route
+***
+
 > All of the projects have either a Flask ,Streamlit ,Django or Tkinter GUI.
 
 > Projects Using AWS requires AWS Keys.
