@@ -1,11 +1,12 @@
 import pyqrcode
 import argparse
 import cv2
+import png
 
 parser = argparse.ArgumentParser()
 
 parser.add_argument("--url",type=str,required=True,help="Url or text for which you want to generate Qr.")
-parser.add_argument("--output",type=str,required=True,help="Path to save qr code image [png]")
+parser.add_argument("--output",type=str,default="qr_code.png",help="Path to save qr code image [png]")
 
 args = parser.parse_args()
 
