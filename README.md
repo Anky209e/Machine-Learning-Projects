@@ -1,8 +1,8 @@
 # Internship Projects
 
-### *All Projects I have worked on during internship.*
+> *All Projects I have worked on during internship.*
 
-
+![img](https://www.codecademy.com/resources/blog/content/images/2021/07/10-coding-projects-for-beginners.png)
 
 ## **List of all Projects**
 
@@ -144,18 +144,24 @@
 ***
 ## Skin Disease
 
-* Detects Skin Disease using skin image
+- Detects Skin Disease using skin image
 
 * * *
+
 ## Virtual Assistant
-* Virtual assistant for doing basic tasks like opening apps and playing music
+
+- Virtual assistant for doing basic tasks like opening apps and playing music
+
 * * *
 ##  Smart Attendance
 * Takes attendance using ML and opencv
+
 ***
+
 ## Sign Language Detection
 * Hand sign language detection using deep learning
 ***
+
 ## Autonomous Tagging of StackOverflow Questions
 * Tags Stackoverflow questions according to relevency
 ***
@@ -220,7 +226,18 @@
 ## Ambulance Routing
 * Finding Shortest Ambulance Route
 ***
-
+## Color Channel Splitting
+* Splitting Color Channels using Computer Vision
+***
+## Flipkart Review Scrap
+* Scraps Reviews from flipkart for a particular project.
+***
+## Words to Vector
+* Converts words to vecotrs using Spacy and analyse COsine similarities.
+***
+## Image Repair
+* Repairs Damaged Image Using Computer Vision
+***
 > All of the projects have either a Flask ,Streamlit ,Django or Tkinter GUI.
 
 > Projects Using AWS requires AWS Keys.
