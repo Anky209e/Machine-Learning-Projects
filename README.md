@@ -217,6 +217,7 @@
 ***
 ##  Emergency Vehicle Detection
 * Detects emergency vehicle from a image
+***
 ## Search Engine
 * Search Engine Created using Streamlit and BS4
 ***
@@ -238,6 +239,19 @@
 ## Image Repair
 * Repairs Damaged Image Using Computer Vision
 ***
+## Finding Missing Person Using Euclidian Distance
+* Tries to find Missing Person using User reports
+***
+## Volume Control Gesture (Only Windows)
+* Controls Volume Using Hand Gestures
+***
+## Pothole Detection (advance)
+- Detecting Potholes using YOLO
+- Get Location Using IP
+- Report Pothole info to MongoDB
+- Streamlit Webapp
+***
+
 > All of the projects have either a Flask ,Streamlit ,Django or Tkinter GUI.
 
 > Projects Using AWS requires AWS Keys.
