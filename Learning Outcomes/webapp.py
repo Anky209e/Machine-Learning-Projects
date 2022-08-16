@@ -1,10 +1,8 @@
-from black import main
-from matplotlib import collections
 import streamlit as st
 import random
 from pymongo import MongoClient
 
-cluster = MongoClient('mongodb+srv://anky:1111@cluster0.6clct.mongodb.net/?retryWrites=true&w=majority')
+cluster = MongoClient('#---MOngoDB address Here---#')
 db = cluster["learning_outcomes"]
 my_page = st.sidebar.radio('Menu', ['Check Question', 'Reported Question','All Data'])
 
