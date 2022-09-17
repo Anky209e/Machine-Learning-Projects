@@ -39,29 +39,58 @@ model.eval()
 
 bot_name = "Villy"
 print(cont)
-while True:
-    # sentence = "do you use credit cards?"
-    sentence = input("You: ")
-    if sentence == "quit":
-        break
+detected_issues = []
+# while True:
+#     # sentence = "do you use credit cards?"
+#     sentence = input("You: ")
+#     if sentence == "quit":
+#         break
 
-    sentence = tokenize(sentence)
+#     sentence = tokenize(sentence)
+#     X = bag_of_words(sentence, all_words)
+#     X = X.reshape(1, X.shape[0])
+#     X = torch.from_numpy(X).to(device)
+
+#     output = model(X)
+#     _, predicted = torch.max(output, dim=1)
+
+#     tag = tags[predicted.item()]
+    
+
+#     probs = torch.softmax(output, dim=1)
+#     prob = probs[0][predicted.item()]
+#     if prob.item() > 0.75:
+#         for intent in intents['intents']:
+#             if tag == intent["tag"]:
+#                 if tag in ["mental","skin","fracture"]:
+#                     detected_issues.append(tag)
+#                 print(f"{bot_name}: {random.choice(intent['responses'])}")
+#     else:
+#         ex_response = ["Sorry,I am not able to get what you want to say :(","Can you please write it more clearly.","I think I am having an issue understanding you."]
+#         er = random.randint(0,2)
+#         print(f"{bot_name}: {ex_response[er]} ")
+# print(f"Detected Disease from Chat: {detected_issues}")
+
+def get_response(message):
+    sentence = tokenize(message)
     X = bag_of_words(sentence, all_words)
     X = X.reshape(1, X.shape[0])
     X = torch.from_numpy(X).to(device)
-
     output = model(X)
     _, predicted = torch.max(output, dim=1)
 
     tag = tags[predicted.item()]
+    
 
     probs = torch.softmax(output, dim=1)
     prob = probs[0][predicted.item()]
     if prob.item() > 0.75:
         for intent in intents['intents']:
             if tag == intent["tag"]:
-                print(f"{bot_name}: {random.choice(intent['responses'])}")
+                if tag in ["mental","skin","fracture"]:
+                    detected_issues.append(tag)
+                return f"{random.choice(intent['responses'])}"
     else:
         ex_response = ["Sorry,I am not able to get what you want to say :(","Can you please write it more clearly.","I think I am having an issue understanding you."]
         er = random.randint(0,2)
-        print(f"{bot_name}: {ex_response[er]} ")
+        return f"{ex_response[er]}"
