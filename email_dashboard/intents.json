@@ -1,0 +1,60 @@
+{
+  "intents": [
+    {
+      "tag": "advertisement",
+      "patterns": [
+        "Buy our one month premium",
+        "Big deals are waiting for you",
+        "Hurray you won a lottery",
+        "Grab the cashback",
+        "Limited time deals",
+        "Go to amazon.com",
+        "flipkart is going on sale",
+        "Diwali Dhamaka",
+        "Big billion days",
+        "snapdeals clothing presents you cashback",
+        "Grab 100% cashback"
+      ],
+      "responses": [
+        "ad"
+      ]
+    },
+    {
+      "tag": "buisness",
+      "patterns": [
+        "Hi,sir you opted for loan",
+        "you bank account balance is low",
+        "Thanks for reaching out to SheerID about a verification request",
+        "We will contact you shortly",
+        "Thanks for being with us",
+        "You prepaid recharge is going to run out soon",
+        "We wanted to talk you about you job",
+        "Thanks for being with our company",
+        "Share market is going down",
+        "nifty",
+        "Stocks of tesla went down",
+        "Job posting"
+      ],
+      "responses": [
+        "buisness"
+      ]
+    },
+    {
+      "tag": "social",
+      "patterns": ["Thanks",
+        "Thank you",
+        "That's helpful",
+        "Thank's a lot!",
+        "hey whatsup",
+        "whatsapp",
+        "discord",
+        "social media",
+        "chat me later",
+        "call me",
+        "one message from friend"
+    ],
+      "responses": ["social"]
+    }
+
+  ]
+}
