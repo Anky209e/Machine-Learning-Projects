@@ -23,7 +23,7 @@ model.load_state_dict(model_state)
 model.eval()
 
 def get_email_type(message):
-    features = ["social","buisness","ad"]
+    features = ["Social","Buisness","Advertisement"]
     sentence = tokenize(message)
     X = bag_of_words(sentence, all_words)
     X = X.reshape(1, X.shape[0])
