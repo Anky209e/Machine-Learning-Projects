@@ -1,90 +1,25 @@
-# %% [markdown]
-# #### Importing libraries
 
-# %%
 from cProfile import label
 import torch, gc
 import os
-# import torchvision
-# import tarfile
+
 import torch.nn as nn
 import numpy as np
 import torch.nn.functional as F
 from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader
 import torchvision.transforms as tt
-# from torch.utils.data import random_split
-# from torchvision.utils import make_grid
-# import matplotlib
-# from torchvision.datasets.utils import download_url
+
 import matplotlib.pyplot as plt
 
 
 
-# %% [markdown]
-# #### Normalizing stats
-
-# %%
-stats = ((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
-
-# %% [markdown]
-# #### Transormations added to normalize and flip images
-
-# %%
-train_tfms = tt.Compose([
-                        tt.RandomHorizontalFlip(),
-                        tt.RandomVerticalFlip(),
-                        tt.RandomRotation(30),
-                        tt.RandomAdjustSharpness(1.3),
-                        tt.ToTensor(),
-                        tt.Normalize(*stats,inplace=True)
-                        ])
-test_tfms = tt.Compose([tt.ToTensor(),tt.Normalize(*stats)])
-
-# %% [markdown]
-# #### Creating training dataset and test dataset
-
-# %%
-train_ds = ImageFolder('data/train',train_tfms)
-test_ds = ImageFolder('data/test',test_tfms)
-
-# %%
-print(f"Classes: {train_ds.classes}")
-
-# %%
-batch_size = 24
-
-# %% [markdown]
-# #### Specifying dataloaders
-
-# %%
-train_dl = DataLoader(train_ds,batch_size,shuffle=True,num_workers=3,pin_memory=True)
-test_dl = DataLoader(test_ds,batch_size*2,num_workers=3,pin_memory=True)
-
-# %% [markdown]
-# ##### Functions for denormalization and checking data
-
-# %%
 def denormalize(images,means,stds):
     means = torch.tensor(means).reshape(1,3,1,1)
     stds = torch.tensor(stds).reshape(1,3,1,1)
     return images*stds+means
 
-# def show_batch(dl):
-#     for images,labels in dl:
-#         fig, ax = plt.subplots(figsize=(12,12))
-#         ax.set_xticks([]);ax.set_yticks([])
-#         denorm_images =  denormalize(images, *stats)
-#         ax.imshow(make_grid(denorm_images[:64], nrow=8).permute(1,2,0).clamp(0,1))
-#         break
 
-# %%
-
-
-# %% [markdown]
-# #### Using GPU for computation
-
-# %%
 def get_default_device():
     """Pick GPU if available, else CPU"""
     if torch.cuda.is_available():
@@ -113,22 +48,22 @@ class DeviceDataLoader():
         """Number of batches"""
         return len(self.dl)
 
-# %%
-device = get_default_device()
+def plot_all(history):
+    print("Saving Graph")
+    fig = plt.figure(1)
+    accuracies = [x['val_acc'] for x in history]
+    loss = [x['val_loss'] for x in history]
+    lr = [x['lrs'] for x in history]
+    plt.plot(accuracies,label = "Accuracy")
+    plt.plot(loss,label="Loss")
+    plt.plot(lr,label="Learning Rate")
+    plt.xlabel('epoch')
+    plt.ylabel('parameters')
+    plt.savefig("images/main.png")
 
-print(f"Using: {device}")
 
-# %% [markdown]
-# #### Loading dataloader to GPU
 
-# %%
-train_dl = DeviceDataLoader(train_dl, device)
-test_dl = DeviceDataLoader(test_dl, device)
 
-# %% [markdown]
-# #### Functions for evaluation of diffrent parameters like accuracy and loss.
-
-# %%
 def accuracy(outputs, labels):
     _, preds = torch.max(outputs, dim=1)
     return torch.tensor(torch.sum(preds == labels).item() / len(preds))
@@ -159,10 +94,7 @@ class ImageClassificationBase(nn.Module):
         print("Epoch [{}], last_lr: {:.5f}, train_loss: {:.4f}, val_loss: {:.4f}, val_acc: {:.4f}".format(
             epoch, result['lrs'][-1], result['train_loss'], result['val_loss'], result['val_acc']))
 
-# %% [markdown]
-# ## Model RESNET
 
-# %%
 class ResNet9(ImageClassificationBase):
     def __init__(self, in_channels, num_classes):
         super().__init__()
@@ -239,33 +171,17 @@ class ResNet9(ImageClassificationBase):
 
 
 
-# %% [markdown]
-# #### Clearing GPU cache
 
-# %%
-gc.collect()
-torch.cuda.empty_cache()
 
-# %% [markdown]
-# #### Uploading model to GPU
-
-# %%
-model = to_device(ResNet9(3,2),device)
-
-model_det = f"""
---------------------------------
-{model}
---------------------------------
-"""
-print(model_det)
-
-# %% [markdown]
-# ### Training Function
-
-# %%
 from tqdm import tqdm
 
-# %%
+def validate_results(path_to_validation_data):
+    val_ds = ImageFolder(path_to_validation_data,test_tfms)
+    val_dl = DataLoader(val_ds,batch_size=32,shuffle=True,num_workers=3,pin_memory=True)
+    model = ResNet9(3,2)
+    model.load_state_dict(torch.load("weights/fingerprint_final.pth"))
+    results = evaluate(model,val_dl)
+    return results
 @torch.no_grad()
 def evaluate(model, val_loader):
     model.eval()
@@ -316,100 +232,96 @@ def fit_one_cycle(epochs, max_lr, model, train_loader, val_loader,
         history.append(result)
     return history
 
-# %% [markdown]
-# ### Training parameters
+if __name__=="__main__":
+    stats = ((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+    
+    train_tfms = tt.Compose([
+                        tt.RandomHorizontalFlip(),
+                        tt.RandomVerticalFlip(),
+                        tt.RandomRotation(30),
+                        tt.RandomAdjustSharpness(1.3),
+                        tt.ToTensor(),
+                        tt.Normalize(*stats,inplace=True)
+                        ])
+    test_tfms = tt.Compose([tt.ToTensor(),tt.Normalize(*stats)])
 
-# %%
-epochs = 20
-max_lr = 0.0001
-grad_clip = 0.1
-weight_decay = 1e-5
-opt_func = torch.optim.Adam
-
-details = f"""
-------------------
-|   Details      |
-------------------
-Epochs: {epochs}
-Max Learning Rate: {max_lr}
-Grad Clip: {grad_clip}
-Decay: {weight_decay}
-Optimizer: Adam
--------------------
-"""
-print(details)
-
-# %% [markdown]
-# ### Training phase
-
-# %%
-ret_data = fit_one_cycle(epochs,max_lr,model,train_dl,test_dl,weight_decay,grad_clip,opt_func)
-
-# %% [markdown]
-# # Evaluate your own validation dataset.
-
-# %%
-os.makedirs("weights",exist_ok=True)
-print("Saving Weights...")
-torch.save(model.state_dict(),"weights/fingerprint_final.pth")
-
-# %%
-def validate_results(path_to_validation_data):
-    val_ds = ImageFolder(path_to_validation_data,test_tfms)
-    val_dl = DataLoader(val_ds,batch_size=32,shuffle=True,num_workers=3,pin_memory=True)
-    model = ResNet9(3,2)
-    model.load_state_dict(torch.load("weights/fingerprint_final.pth"))
-    results = evaluate(model,val_dl)
-    return results
-print("Validating Results...")
-final_res = validate_results("data/test")
-
-final_cont = f"""
-==========================
-        Results
-==========================
-Trained for {epochs} epochs using {device}.
-Final Loss on Validation set: {round(final_res["val_loss"],3)}
-Final Accuracy on Validation set: {round(final_res["val_acc"]*100,3)}%
-==========================
-"""
-print(final_cont)
-import json
+    train_ds = ImageFolder('data/train',train_tfms)
+    test_ds = ImageFolder('data/test',test_tfms)
 
 
-os.makedirs("images",exist_ok=True)
+    print(f"Classes: {train_ds.classes}")
 
 
-def plot_all(history):
-    print("Saving Graph")
-    fig = plt.figure(1)
-    accuracies = [x['val_acc'] for x in history]
-    loss = [x['val_loss'] for x in history]
-    lr = [x['lrs'] for x in history]
-    plt.plot(accuracies,label = "Accuracy")
-    plt.plot(loss,label="Loss")
-    plt.plot(lr,label="Learning Rate")
-    plt.xlabel('epoch')
-    plt.ylabel('parameters')
-    plt.savefig("images/main.png")
+    batch_size = 24
 
-plot_all(ret_data)
+    train_dl = DataLoader(train_ds,batch_size,shuffle=True,num_workers=3,pin_memory=True)
+    test_dl = DataLoader(test_ds,batch_size*2,num_workers=3,pin_memory=True)
+    device = get_default_device()
 
-with open('info.json', 'w') as outfile:
-    json.dump(final_res, outfile)
+    print(f"Using: {device}")
+
+    train_dl = DeviceDataLoader(train_dl, device)
+    test_dl = DeviceDataLoader(test_dl, device)
+
+    model = to_device(ResNet9(3,2),device)
+
+    model_det = f"""
+    --------------------------------
+    {model}
+    --------------------------------
+    """
+    print(model_det)
+
+    epochs = 20
+    max_lr = 0.0001
+    grad_clip = 0.1
+    weight_decay = 1e-5
+    opt_func = torch.optim.Adam
+
+    details = f"""
+    ------------------
+    |   Details      |
+    ------------------
+    Epochs: {epochs}
+    Max Learning Rate: {max_lr}
+    Grad Clip: {grad_clip}
+    Decay: {weight_decay}
+    Optimizer: Adam
+    -------------------
+    """
+    print(details)
+
+    ret_data = fit_one_cycle(epochs,max_lr,model,train_dl,test_dl,weight_decay,grad_clip,opt_func)
+
+    os.makedirs("weights",exist_ok=True)
+    print("Saving Weights...")
+    torch.save(model.state_dict(),"weights/fingerprint_final.pth")
 
 
-# %%
-# def predict_image(img, model):
-#     # Convert to a batch of 1
-#     xb = to_device(img.unsqueeze(0), device)
-#     # Get predictions from model
-#     yb = model(xb)
-#     # Pick index with highest probability
-#     a, preds  = torch.max(yb, dim=1)
-#     # Retrieve the class label
-#     return train_ds.classes[preds[0].item()]
+    print("Validating Results...")
+    final_res = validate_results("data/test")
 
+    final_cont = f"""
+    ==========================
+            Results
+    ==========================
+    Trained for {epochs} epochs using {device}.
+    Final Loss on Validation set: {round(final_res["val_loss"],3)}
+    Final Accuracy on Validation set: {round(final_res["val_acc"]*100,3)}%
+    ==========================
+    """
+    print(final_cont)
+    import json
+
+
+    os.makedirs("images",exist_ok=True)
+
+
+
+    plot_all(ret_data)
+
+    with open('info.json', 'w') as outfile:
+        json.dump(final_res, outfile)
 
 
 
