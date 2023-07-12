@@ -1,6 +1,6 @@
-# Internship Projects
+# Machine Learing Projects
 
-> *All Projects I have worked on during internship.*
+> *All Machine learning,Deep Learning and Computer Vision projects I completed when bored..*
 
 ![img](https://www.codecademy.com/resources/blog/content/images/2021/07/10-coding-projects-for-beginners.png)
 
