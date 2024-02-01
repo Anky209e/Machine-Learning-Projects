@@ -56,10 +56,10 @@ while cv.waitKey(1) < 0:
             break
 
         #Load the dictionary that was used to generate the markers.
-        dictionary = cv.aruco.Dictionary_get(cv.aruco.DICT_6X6_250)
+        dictionary = cv.aruco.getPredefinedDictionary(cv.aruco.DICT_6X6_250)
         
         # Initialize the detector parameters using default values
-        parameters =  cv.aruco.DetectorParameters_create()
+        parameters =  cv.aruco.DetectorParameters()
         
         # Detect the markers in the image
         markerCorners, markerIds, rejectedCandidates = cv.aruco.detectMarkers(frame, dictionary, parameters=parameters)
